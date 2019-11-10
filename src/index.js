@@ -7,7 +7,7 @@ L.Control.EasyPrint = L.Control.extend({
     position: 'topleft',
     sizeModes: ['Current'],
     filename: 'map',
-    outputMode: 'print',
+    outputMode: 'print', //[print, download, event] 
     hidden: false,
     tileWait: 500,
     hideControlContainer: true,
