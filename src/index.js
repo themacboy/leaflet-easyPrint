@@ -95,12 +95,14 @@ L.Control.EasyPrint = L.Control.extend({
       center: this._map.getCenter()
     };
     if (this.originalState.mapWidth === 'auto') {
-      this.originalState.mapWidth = this._map.getSize().x  + 'px'
+        this.originalState.mapWidth = this._map.getSize().x  + 'px'
+        this.originalState.mapHeight = this._map.getSize().y  + 'px'
       this.originalState.widthWasAuto = true
     } else if (this.originalState.mapWidth.includes('%')) {
       this.originalState.percentageWidth = this.originalState.mapWidth
       this.originalState.widthWasPercentage = true
       this.originalState.mapWidth = this._map.getSize().x  + 'px'
+      this.originalState.mapHeight = this._map.getSize().y  + 'px'
     }
     this._map.fire("easyPrint-start", { event: event });
     if (!this.options.hidden) {
@@ -118,7 +120,8 @@ L.Control.EasyPrint = L.Control.extend({
     }
     this.outerContainer = this._createOuterContainer(this.mapContainer)
     if (this.originalState.widthWasAuto) {
-      this.outerContainer.style.width = this.originalState.mapWidth
+        this.outerContainer.style.width = this.originalState.mapWidth
+        this.outerContainer.style.height = this.originalState.mapheight
     }
     this._createImagePlaceholder(sizeMode)
   },
@@ -183,12 +186,14 @@ L.Control.EasyPrint = L.Control.extend({
   _printOpertion: function (sizemode) {
     var plugin = this;
     var widthForExport = this.mapContainer.style.width
+    var heightForExport = this.mapContainer.style.height
     if (this.originalState.widthWasAuto && sizemode === 'CurrentSize' || this.originalState.widthWasPercentage && sizemode === 'CurrentSize') {
-      widthForExport = this.originalState.mapWidth
+        widthForExport = this.originalState.mapWidth
+        heightForExport = this.originalState.mapHeight
     }
     domtoimage.toPng(plugin.mapContainer, {
-        width: parseInt(widthForExport),
-        height: parseInt(plugin.mapContainer.style.height.replace('px'))
+        width: parseInt(widthForExport.replace('px')),
+        height: parseInt(heightForExport.replace('px'))
       })
       .then(function (dataUrl) {
           var blob = plugin._dataURItoBlob(dataUrl);
@@ -215,11 +220,8 @@ L.Control.EasyPrint = L.Control.extend({
             plugin._map.setView(plugin.originalState.center);
             plugin._map.setZoom(plugin.originalState.zoom);
           }
-          if (plugin.options.outputMode === 'event') {
-            plugin._map.fire("easyPrint-finished", {event: blob});
-          } else {
-            plugin._map.fire("easyPrint-finished");
-          }
+          
+          plugin._map.fire("easyPrint-finished", {blob: blob});
       })
       .catch(function (error) {
           console.error('Print operation failed', error);
