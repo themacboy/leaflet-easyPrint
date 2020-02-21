@@ -88,22 +88,37 @@ L.Control.EasyPrint = L.Control.extend({
     }
     this.originalState = {
       mapWidth: this.mapContainer.style.width,
+	  mapHeight: this.mapContainer.style.height,
       widthWasAuto: false,
+      heightWasAuto: false,
       widthWasPercentage: false,
-      mapHeight: this.mapContainer.style.height,
+      heightWasPercentage: false,
       zoom: this._map.getZoom(),
       center: this._map.getCenter()
     };
+    
     if (this.originalState.mapWidth === 'auto') {
         this.originalState.mapWidth = this._map.getSize().x  + 'px'
-        this.originalState.mapHeight = this._map.getSize().y  + 'px'
       this.originalState.widthWasAuto = true
     } else if (this.originalState.mapWidth.includes('%')) {
       this.originalState.percentageWidth = this.originalState.mapWidth
       this.originalState.widthWasPercentage = true
       this.originalState.mapWidth = this._map.getSize().x  + 'px'
-      this.originalState.mapHeight = this._map.getSize().y  + 'px'
+    } else {
+        this.originalState.mapWidth = this._map.getSize().x  + 'px'
     }
+    
+    if (this.originalState.mapHeight === 'auto') {
+        this.originalState.mapHeight = this._map.getSize().y  + 'px'
+      this.originalState.heightWasAuto = true
+    } else if (this.originalState.mapHeight.includes('%')) {
+      this.originalState.percentageHeight = this.originalState.mapHeight
+      this.originalState.heightWasPercentage = true
+      this.originalState.mapHeight = this._map.getSize().y  + 'px'
+    } else {
+        this.originalState.mapHeight = this._map.getSize().y  + 'px'
+    }
+    
     this._map.fire("easyPrint-start", { event: event });
     if (!this.options.hidden) {
       this._togglePageSizeButtons({type: null});
@@ -187,7 +202,7 @@ L.Control.EasyPrint = L.Control.extend({
     var plugin = this;
     var widthForExport = this.mapContainer.style.width
     var heightForExport = this.mapContainer.style.height
-    if (this.originalState.widthWasAuto && sizemode === 'CurrentSize' || this.originalState.widthWasPercentage && sizemode === 'CurrentSize') {
+    if (sizemode === 'CurrentSize') {
         widthForExport = this.originalState.mapWidth
         heightForExport = this.originalState.mapHeight
     }
@@ -206,15 +221,21 @@ L.Control.EasyPrint = L.Control.extend({
           plugin._toggleClasses(plugin.options.hideClasses, true);
 
           if (plugin.outerContainer) {
+            if (plugin.originalState.heightWasAuto) {
+              plugin.mapContainer.style.height = 'auto'
+            } else if (plugin.originalState.heightWasPercentage) {
+              plugin.mapContainer.style.height = plugin.originalState.percentageHeight
+            } else {
+              plugin.mapContainer.style.height = plugin.originalState.mapWidth;              
+            }
             if (plugin.originalState.widthWasAuto) {
-              plugin.mapContainer.style.width = 'auto'
+                plugin.mapContainer.style.width = 'auto'
             } else if (plugin.originalState.widthWasPercentage) {
-              plugin.mapContainer.style.width = plugin.originalState.percentageWidth
+                plugin.mapContainer.style.width = plugin.originalState.percentageWidth
+            } else {
+                plugin.mapContainer.style.width = plugin.originalState.mapHeight;              
             }
-            else {
-              plugin.mapContainer.style.width = plugin.originalState.mapWidth;              
-            }
-            plugin.mapContainer.style.height = plugin.originalState.mapHeight;
+            
             plugin._removeOuterContainer(plugin.mapContainer, plugin.outerContainer, plugin.blankDiv)
             plugin._map.invalidateSize();
             plugin._map.setView(plugin.originalState.center);
