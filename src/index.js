@@ -1,4 +1,4 @@
-var domtoimage = require('dom-to-image');
+var domtoimage = require('dom-to-image-more');
 var fileSaver = require('file-saver');
 
 L.Control.EasyPrint = L.Control.extend({

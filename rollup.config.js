@@ -5,7 +5,7 @@ import uglify from 'rollup-plugin-uglify';
 
 export default {
   entry: 'src/main.js',
-  format: 'umd',
+  format: 'iife',
   moduleName: 'leaflet-easyprint',
   plugins: [ 
     resolve(),
