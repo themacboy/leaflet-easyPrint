@@ -4,17 +4,20 @@ import babel from 'rollup-plugin-babel';
 import uglify from 'rollup-plugin-uglify';
 
 export default {
-  entry: 'src/main.js',
-  format: 'iife',
-  moduleName: 'leaflet-easyprint',
+  input: 'src/main.js',
   plugins: [ 
-    resolve(),
+    resolve({browser: true, preferBuiltins: false}),
     babel({
       exclude: 'node_modules/**'
     }),
     uglify(),
     commonjs()
   ],
-  sourceMap: true,
-  dest: 'dist/bundle.js'
+  output: {
+	format: 'iife',
+	file: 'dist/bundle.js',
+	name: 'leaflet-easyprint',
+	extend: true,
+	sourcemap: "inline",
+  }
 };
