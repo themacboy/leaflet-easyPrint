@@ -6,7 +6,7 @@ import uglify from 'rollup-plugin-uglify';
 export default {
   input: 'src/main.js',
   plugins: [ 
-    resolve({browser: true, preferBuiltins: false}),
+    resolve({browser: true, preferBuiltins: true}),
     babel({
       exclude: 'node_modules/**'
     }),
@@ -18,6 +18,6 @@ export default {
 	file: 'dist/bundle.js',
 	name: 'leaflet-easyprint',
 	extend: true,
-	sourcemap: "inline",
+	sourcemap: true,
   }
 };
