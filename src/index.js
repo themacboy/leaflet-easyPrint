@@ -78,7 +78,7 @@ L.Control.EasyPrint = L.Control.extend({
     return container;
   },
 
-  printMap: function (event, filename) {
+  printMap: async function (event, filename) {
     if (filename) {
       this.options.filename = filename
     }
@@ -131,7 +131,7 @@ L.Control.EasyPrint = L.Control.extend({
     }
     var sizeMode = typeof event !== 'string' ? event.target.className : event;
     if (sizeMode === 'CurrentSize') {
-      return this._printOpertion(sizeMode);
+      return await this._printOpertion(sizeMode);
     }
     this.outerContainer = this._createOuterContainer(this.mapContainer)
     if (this.originalState.widthWasAuto) {
@@ -198,7 +198,7 @@ L.Control.EasyPrint = L.Control.extend({
     }, plugin.options.tileWait);
   },
 
-  _printOpertion: function (sizemode) {
+  _printOpertion: async function (sizemode) {
     var plugin = this;
     var widthForExport = this.mapContainer.style.width
     var heightForExport = this.mapContainer.style.height
@@ -206,7 +206,7 @@ L.Control.EasyPrint = L.Control.extend({
         widthForExport = this.originalState.mapWidth
         heightForExport = this.originalState.mapHeight
     }
-    domtoimage.toPng(plugin.mapContainer, {
+    await domtoimage.toPng(plugin.mapContainer, {
         width: parseInt(widthForExport.replace('px')),
         height: parseInt(heightForExport.replace('px'))
       })
@@ -243,6 +243,8 @@ L.Control.EasyPrint = L.Control.extend({
           }
           
           plugin._map.fire("easyPrint-finished", {blob: blob});
+          
+          return blob;
       })
       .catch(function (error) {
           console.error('Print operation failed', error);
