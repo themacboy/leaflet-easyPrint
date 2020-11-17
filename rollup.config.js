@@ -14,7 +14,7 @@ export default {
     commonjs()
   ],
   output: {
-	format: 'iife',
+	format: 'es',
 	file: 'dist/bundle.js',
 	name: 'leaflet-easyprint',
 	extend: true,
