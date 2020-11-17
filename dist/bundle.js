@@ -1,2 +1,1295 @@
-!function(){"use strict";function t(t,e){return e={exports:{}},t(e,e.exports),e.exports}var e="undefined"!=typeof window?window:"undefined"!=typeof global?global:"undefined"!=typeof self?self:{},n=t(function(t,e){!function(e){function n(t,e){function n(t){return e.bgcolor&&(t.style.backgroundColor=e.bgcolor),e.width&&(t.style.width=e.width+"px"),e.height&&(t.style.height=e.height+"px"),e.style&&Object.keys(e.style).forEach(function(n){t.style[n]=e.style[n]}),t}return e=e||{},l(e),Promise.resolve(t).then(function(t){return c(t,e.filter,!0)}).then(g).then(d).then(n).then(function(n){return h(n,e.width||p.width(t),e.height||p.height(t))})}function i(t,e){return u(t,e||{}).then(function(e){return e.getContext("2d").getImageData(0,0,p.width(t),p.height(t)).data})}function o(t,e){return u(t,e||{}).then(function(t){return t.toDataURL()})}function r(t,e){return e=e||{},u(t,e).then(function(t){return t.toDataURL("image/jpeg",e.quality||1)})}function a(t,e){return u(t,e||{}).then(p.canvasToBlob)}function s(t,e){return u(t,e||{})}function l(t){void 0===t.imagePlaceholder?y.impl.options.imagePlaceholder=w.imagePlaceholder:y.impl.options.imagePlaceholder=t.imagePlaceholder,void 0===t.cacheBust?y.impl.options.cacheBust=w.cacheBust:y.impl.options.cacheBust=t.cacheBust,void 0===t.useCredentials?y.impl.options.useCredentials=w.useCredentials:y.impl.options.useCredentials=t.useCredentials}function u(t,e){function i(t,n){var i=document.createElement("canvas");if(i.width=(e.width||p.width(t))*n,i.height=(e.height||p.height(t))*n,e.bgcolor){var o=i.getContext("2d");o.fillStyle=e.bgcolor,o.fillRect(0,0,i.width,i.height)}return i}return n(t,e).then(p.makeImage).then(p.delay(100)).then(function(n){var o="number"!=typeof e.scale?1:e.scale,r=i(t,o),a=r.getContext("2d");return n&&(a.scale(o,o),a.drawImage(n,0,0)),r})}function c(t,e,n){function i(t){return t instanceof HTMLCanvasElement?p.makeImage(t.toDataURL()):t.cloneNode(!1)}function o(t,e,n){var i=t.childNodes;return 0===i.length?Promise.resolve(e):function(t,e,n){var i=Promise.resolve();return e.forEach(function(e){i=i.then(function(){return c(e,n)}).then(function(e){e&&t.appendChild(e)})}),i}(e,p.asArray(i),n).then(function(){return e})}function r(t,e){function n(){!function(t,e){t.cssText?(e.cssText=t.cssText,e.font=t.font):function(t,e){p.asArray(t).forEach(function(n){e.setProperty(n,t.getPropertyValue(n),t.getPropertyPriority(n))})}(t,e)}(window.getComputedStyle(t),e.style)}function i(){function n(n){var i=window.getComputedStyle(t,n),o=i.getPropertyValue("content");if(""!==o&&"none"!==o){var r=p.uid(),a=e.getAttribute("class");a&&e.setAttribute("class",a+" "+r);var s=document.createElement("style");s.appendChild(function(t,e,n){var i="."+t+":"+e,o=n.cssText?function(t){var e=t.getPropertyValue("content");return t.cssText+" content: "+e+";"}(n):function(t){function e(e){return e+": "+t.getPropertyValue(e)+(t.getPropertyPriority(e)?" !important":"")}return p.asArray(t).map(e).join("; ")+";"}(n);return document.createTextNode(i+"{"+o+"}")}(r,n,i)),e.appendChild(s)}}[":before",":after"].forEach(function(t){n(t)})}function o(){t instanceof HTMLTextAreaElement&&(e.innerHTML=t.value),t instanceof HTMLInputElement&&e.setAttribute("value",t.value)}function r(){e instanceof SVGElement&&(e.setAttribute("xmlns","http://www.w3.org/2000/svg"),e instanceof SVGRectElement&&["width","height"].forEach(function(t){var n=e.getAttribute(t);n&&e.style.setProperty(t,n)}))}return e instanceof Element?Promise.resolve().then(n).then(i).then(o).then(r).then(function(){return e}):e}return n||!e||e(t)?Promise.resolve(t).then(i).then(function(n){return o(t,n,e)}).then(function(e){return r(t,e)}):Promise.resolve()}function g(t){return f.resolveAll().then(function(e){var n=document.createElement("style");return t.appendChild(n),n.appendChild(document.createTextNode(e)),t})}function d(t){return M.inlineAll(t).then(function(){return t})}function h(t,e,n){return Promise.resolve(t).then(function(t){return t.setAttribute("xmlns","http://www.w3.org/1999/xhtml"),(new XMLSerializer).serializeToString(t)}).then(p.escapeXhtml).then(function(t){return'<foreignObject x="0" y="0" width="100%" height="100%">'+t+"</foreignObject>"}).then(function(t){return'<svg xmlns="http://www.w3.org/2000/svg" width="'+e+'" height="'+n+'">'+t+"</svg>"}).then(function(t){return"data:image/svg+xml;charset=utf-8,"+t})}var p=function(){function t(){var t="application/font-woff";return{woff:t,woff2:t,ttf:"application/font-truetype",eot:"application/vnd.ms-fontobject",png:"image/png",jpg:"image/jpeg",jpeg:"image/jpeg",gif:"image/gif",tiff:"image/tiff",svg:"image/svg+xml"}}function e(t){var e=/\.([^\.\/]*?)(\?|$)/g.exec(t);return e?e[1]:""}function n(n){var i=e(n).toLowerCase();return t()[i]||""}function i(t){return-1!==t.search(/^(data:)/)}function o(t){return new Promise(function(e){for(var n=window.atob(t.toDataURL().split(",")[1]),i=n.length,o=new Uint8Array(i),r=0;r<i;r++)o[r]=n.charCodeAt(r);e(new Blob([o],{type:"image/png"}))})}function r(t){return t.toBlob?new Promise(function(e){t.toBlob(e)}):o(t)}function a(t,e){var n=document.implementation.createHTMLDocument(),i=n.createElement("base");n.head.appendChild(i);var o=n.createElement("a");return n.body.appendChild(o),i.href=e,o.href=t,o.href}function s(t){return"data:,"===t?Promise.resolve():new Promise(function(e,n){var i=new Image;y.impl.options.useCredentials&&(i.crossOrigin="use-credentials"),i.onload=function(){e(i)},i.onerror=n,i.src=t})}function l(t){var e=3e4;return y.impl.options.cacheBust&&(t+=(/\?/.test(t)?"&":"?")+(new Date).getTime()),new Promise(function(n){function i(){if(4===a.readyState){if(200!==a.status)return void(s?n(s):r("cannot fetch resource: "+t+", status: "+a.status));var e=new FileReader;e.onloadend=function(){var t=e.result.split(/,/)[1];n(t)},e.readAsDataURL(a.response)}}function o(){s?n(s):r("timeout of "+e+"ms occured while fetching resource: "+t)}function r(t){console.error(t),n("")}var a=new XMLHttpRequest;a.onreadystatechange=i,a.ontimeout=o,a.responseType="blob",a.timeout=e,y.impl.options.useCredentials&&(a.withCredentials=!0),a.open("GET",t,!0),a.send();var s;if(y.impl.options.imagePlaceholder){var l=y.impl.options.imagePlaceholder.split(/,/);l&&l[1]&&(s=l[1])}})}function u(t,e){return"data:"+e+";base64,"+t}function c(t){return t.replace(/([.*+?^${}()|\[\]\/\\])/g,"\\$1")}function g(t){return function(e){return new Promise(function(n){setTimeout(function(){n(e)},t)})}}function d(t){for(var e=[],n=t.length,i=0;i<n;i++)e.push(t[i]);return e}function h(t){return t.replace(/#/g,"%23").replace(/\n/g,"%0A")}function p(t){var e=f(t,"border-left-width"),n=f(t,"border-right-width");return t.scrollWidth+e+n}function m(t){var e=f(t,"border-top-width"),n=f(t,"border-bottom-width");return t.scrollHeight+e+n}function f(t,e){var n=window.getComputedStyle(t).getPropertyValue(e);return parseFloat(n.replace("px",""))}return{escape:c,parseExtension:e,mimeType:n,dataAsUrl:u,isDataUrl:i,canvasToBlob:r,resolveUrl:a,getAndEncode:l,uid:function(){var t=0;return function(){return"u"+function(){return("0000"+(Math.random()*Math.pow(36,4)<<0).toString(36)).slice(-4)}()+t++}}(),delay:g,asArray:d,escapeXhtml:h,makeImage:s,width:p,height:m}}(),m=function(){function t(t){return-1!==t.search(o)}function e(t){for(var e,n=[];null!==(e=o.exec(t));)n.push(e[1]);return n.filter(function(t){return!p.isDataUrl(t)})}function n(t,e,n,i){function o(t){return new RegExp("(url\\(['\"]?)("+p.escape(t)+")(['\"]?\\))","g")}return Promise.resolve(e).then(function(t){return n?p.resolveUrl(t,n):t}).then(i||p.getAndEncode).then(function(t){return p.dataAsUrl(t,p.mimeType(e))}).then(function(n){return t.replace(o(e),"$1"+n+"$3")})}function i(i,o,r){return function(){return!t(i)}()?Promise.resolve(i):Promise.resolve(i).then(e).then(function(t){var e=Promise.resolve(i);return t.forEach(function(t){e=e.then(function(e){return n(e,t,o,r)})}),e})}var o=/url\(['"]?([^'"]+?)['"]?\)/g;return{inlineAll:i,shouldProcess:t,impl:{readUrls:e,inline:n}}}(),f=function(){function t(){return e(document).then(function(t){return Promise.all(t.map(function(t){return t.resolve()}))}).then(function(t){return t.join("\n")})}function e(){function t(t){return t.filter(function(t){return t.type===CSSRule.FONT_FACE_RULE}).filter(function(t){return m.shouldProcess(t.style.getPropertyValue("src"))})}function e(t){var e=[];return t.forEach(function(t){if(t.hasOwnProperty("cssRules"))try{p.asArray(t.cssRules||[]).forEach(e.push.bind(e))}catch(e){console.log("Error while reading CSS rules from "+t.href,e.toString())}}),e}function n(t){return{resolve:function(){var e=(t.parentStyleSheet||{}).href;return m.inlineAll(t.cssText,e)},src:function(){return t.style.getPropertyValue("src")}}}return Promise.resolve(p.asArray(document.styleSheets)).then(e).then(t).then(function(t){return t.map(n)})}return{resolveAll:t,impl:{readAll:e}}}(),M=function(){function t(t){function e(e){return p.isDataUrl(t.src)?Promise.resolve():Promise.resolve(t.src).then(e||p.getAndEncode).then(function(e){return p.dataAsUrl(e,p.mimeType(t.src))}).then(function(e){return new Promise(function(n,i){t.onload=n,t.onerror=n,t.src=e})})}return{inline:e}}function e(n){return n instanceof Element?function(t){var e=t.style.getPropertyValue("background");return e?m.inlineAll(e).then(function(e){t.style.setProperty("background",e,t.style.getPropertyPriority("background"))}).then(function(){return t}):Promise.resolve(t)}(n).then(function(){return n instanceof HTMLImageElement?t(n).inline():Promise.all(p.asArray(n.childNodes).map(function(t){return e(t)}))}):Promise.resolve(n)}return{inlineAll:e,impl:{newImage:t}}}(),w={imagePlaceholder:void 0,cacheBust:!1,useCredentials:!1},y={toSvg:n,toPng:o,toJpeg:r,toBlob:a,toPixelData:i,toCanvas:s,impl:{fontFaces:f,images:M,util:p,inliner:m,options:{}}};t.exports=y}()}),i=t(function(t,n){!function(t,e){e()}(0,function(){function n(t,e){return void 0===e?e={autoBom:!1}:"object"!=typeof e&&(console.warn("Deprecated: Expected third argument to be a object"),e={autoBom:!e}),e.autoBom&&/^\s*(?:text\/\S*|application\/xml|\S*\/\S*\+xml)\s*;.*charset\s*=\s*utf-8/i.test(t.type)?new Blob(["\ufeff",t],{type:t.type}):t}function i(t,e,n){var i=new XMLHttpRequest;i.open("GET",t),i.responseType="blob",i.onload=function(){l(i.response,e,n)},i.onerror=function(){console.error("could not download file")},i.send()}function o(t){var e=new XMLHttpRequest;e.open("HEAD",t,!1);try{e.send()}catch(t){}return 200<=e.status&&299>=e.status}function r(t){try{t.dispatchEvent(new MouseEvent("click"))}catch(n){var e=document.createEvent("MouseEvents");e.initMouseEvent("click",!0,!0,window,0,0,0,80,20,!1,!1,!1,!1,0,null),t.dispatchEvent(e)}}var a="object"==typeof window&&window.window===window?window:"object"==typeof self&&self.self===self?self:"object"==typeof e&&e.global===e?e:void 0,s=/Macintosh/.test(navigator.userAgent)&&/AppleWebKit/.test(navigator.userAgent)&&!/Safari/.test(navigator.userAgent),l=a.saveAs||("object"!=typeof window||window!==a?function(){}:"download"in HTMLAnchorElement.prototype&&!s?function(t,e,n){var s=a.URL||a.webkitURL,l=document.createElement("a");e=e||t.name||"download",l.download=e,l.rel="noopener","string"==typeof t?(l.href=t,l.origin===location.origin?r(l):o(l.href)?i(t,e,n):r(l,l.target="_blank")):(l.href=s.createObjectURL(t),setTimeout(function(){s.revokeObjectURL(l.href)},4e4),setTimeout(function(){r(l)},0))}:"msSaveOrOpenBlob"in navigator?function(t,e,a){if(e=e||t.name||"download","string"!=typeof t)navigator.msSaveOrOpenBlob(n(t,a),e);else if(o(t))i(t,e,a);else{var s=document.createElement("a");s.href=t,s.target="_blank",setTimeout(function(){r(s)})}}:function(t,e,n,o){if(o=o||open("","_blank"),o&&(o.document.title=o.document.body.innerText="downloading..."),"string"==typeof t)return i(t,e,n);var r="application/octet-stream"===t.type,l=/constructor/i.test(a.HTMLElement)||a.safari,u=/CriOS\/[\d]+/.test(navigator.userAgent);if((u||r&&l||s)&&"undefined"!=typeof FileReader){var c=new FileReader;c.onloadend=function(){var t=c.result;t=u?t:t.replace(/^data:[^;]*;/,"data:attachment/file;"),o?o.location.href=t:location=t,o=null},c.readAsDataURL(t)}else{var g=a.URL||a.webkitURL,d=g.createObjectURL(t);o?o.location=d:location.href=d,o=null,setTimeout(function(){g.revokeObjectURL(d)},4e4)}});a.saveAs=l.saveAs=l,t.exports=l})});L.Control.EasyPrint=L.Control.extend({options:{title:"Print map",position:"topleft",sizeModes:["Current"],filename:"map",outputMode:"blob",hidden:!1,tileWait:500,hideControlContainer:!0,hideClasses:[],customWindowTitle:window.document.title,spinnerBgCOlor:"#0DC5C1",customSpinnerClass:"epLoader",defaultSizeTitles:{Current:"Current Size",A4Landscape:"A4 Landscape",A4Portrait:"A4 Portrait"}},onAdd:function(){this.mapContainer=this._map.getContainer(),this.options.sizeModes=this.options.sizeModes.map(function(t){return"Current"===t?{name:this.options.defaultSizeTitles.Current,className:"CurrentSize"}:"A4Landscape"===t?{height:this._a4PageSize.height,width:this._a4PageSize.width,name:this.options.defaultSizeTitles.A4Landscape,className:"A4Landscape page"}:"A4Portrait"===t?{height:this._a4PageSize.width,width:this._a4PageSize.height,name:this.options.defaultSizeTitles.A4Portrait,className:"A4Portrait page"}:t},this);var t=L.DomUtil.create("div","leaflet-control-easyPrint leaflet-bar leaflet-control");if(!this.options.hidden){this._addCss(),L.DomEvent.addListener(t,"mouseover",this._togglePageSizeButtons,this),L.DomEvent.addListener(t,"mouseout",this._togglePageSizeButtons,this),L.DomEvent.on(t,"click",function(t){L.DomEvent.stopPropagation(t)});var e="leaflet-control-easyPrint-button";"download"===this.options.outputMode&&(e+="-export"),this.link=L.DomUtil.create("a",e,t),this.link.id="leafletEasyPrint",this.link.title=this.options.title,this.holder=L.DomUtil.create("ul","easyPrintHolder",t),this.options.sizeModes.forEach(function(t){var e=L.DomUtil.create("li","easyPrintSizeMode",this.holder);e.title=t.name;L.DomUtil.create("a",t.className,e);L.DomEvent.addListener(e,"click",this.printMap,this)},this),L.DomEvent.disableClickPropagation(t)}return t},printMap:function(t,e){e&&(this.options.filename=e),"print"===this.options.outputMode&&(this._page=window.open("","_blank","toolbar=no,status=no,menubar=no,scrollbars=no,resizable=no,left=10, top=10, width=200, height=250, visible=none"),this._page.document.write(this._createSpinner(this.options.customWindowTitle,this.options.customSpinnerClass,this.options.spinnerBgCOlor))),this.originalState={mapWidth:this.mapContainer.style.width,mapHeight:this.mapContainer.style.height,widthWasAuto:!1,heightWasAuto:!1,widthWasPercentage:!1,heightWasPercentage:!1,zoom:this._map.getZoom(),center:this._map.getCenter()},"auto"===this.originalState.mapWidth?(this.originalState.mapWidth=this._map.getSize().x+"px",this.originalState.widthWasAuto=!0):this.originalState.mapWidth.includes("%")?(this.originalState.percentageWidth=this.originalState.mapWidth,this.originalState.widthWasPercentage=!0,this.originalState.mapWidth=this._map.getSize().x+"px"):this.originalState.mapWidth=this._map.getSize().x+"px","auto"===this.originalState.mapHeight?(this.originalState.mapHeight=this._map.getSize().y+"px",this.originalState.heightWasAuto=!0):this.originalState.mapHeight.includes("%")?(this.originalState.percentageHeight=this.originalState.mapHeight,this.originalState.heightWasPercentage=!0,this.originalState.mapHeight=this._map.getSize().y+"px"):this.originalState.mapHeight=this._map.getSize().y+"px",this._map.fire("easyPrint-start",{event:t}),this.options.hidden||this._togglePageSizeButtons({type:null}),this.options.hideControlContainer&&this._toggleControls(),this.options.hideClasses&&this._toggleClasses(this.options.hideClasses);var n="string"!=typeof t?t.target.className:t;if("CurrentSize"===n)return this._printOpertion(n);this.outerContainer=this._createOuterContainer(this.mapContainer),this.originalState.widthWasAuto&&(this.outerContainer.style.width=this.originalState.mapWidth,this.outerContainer.style.height=this.originalState.mapheight),this._createImagePlaceholder(n)},_createImagePlaceholder:function(t){var e=this;n.toPng(this.mapContainer,{width:parseInt(this.originalState.mapWidth.replace("px")),height:parseInt(this.originalState.mapHeight.replace("px"))}).then(function(n){e.blankDiv=document.createElement("div");var i=e.blankDiv;e.outerContainer.parentElement.insertBefore(i,e.outerContainer),i.className="epHolder",i.style.backgroundImage='url("'+n+'")',i.style.position="absolute",i.style.zIndex=1011,i.style.display="initial",i.style.width=e.originalState.mapWidth,i.style.height=e.originalState.mapHeight,e._resizeAndPrintMap(t)}).catch(function(t){console.error("oops, something went wrong!",t)})},_resizeAndPrintMap:function(t){this.outerContainer.style.opacity=0;var e=this.options.sizeModes.filter(function(e){return e.className.indexOf(t)>-1});e=e[0],this.mapContainer.style.width=e.width+"px",this.mapContainer.style.height=e.height+"px",this.mapContainer.style.width>this.mapContainer.style.height?this.orientation="portrait":this.orientation="landscape",this._map.setView(this.originalState.center),this._map.setZoom(this.originalState.zoom),this._map.invalidateSize(),this.options.tileLayer?this._pausePrint(t):this._printOpertion(t)},_pausePrint:function(t){var e=this,n=setInterval(function(){e.options.tileLayer.isLoading()||(clearInterval(n),e._printOpertion(t))},e.options.tileWait)},_printOpertion:function(t){var e=this,o=this.mapContainer.style.width,r=this.mapContainer.style.height;"CurrentSize"===t&&(o=this.originalState.mapWidth,r=this.originalState.mapHeight),n.toPng(e.mapContainer,{width:parseInt(o.replace("px")),height:parseInt(r.replace("px"))}).then(function(t){var n=e._dataURItoBlob(t);"download"===e.options.outputMode?i.saveAs(n,e.options.filename+".png"):"print"===e.options.outputMode&&e._sendToBrowserPrint(t,e.orientation),e._toggleControls(!0),e._toggleClasses(e.options.hideClasses,!0),e.outerContainer&&(e.originalState.heightWasAuto?e.mapContainer.style.height="auto":e.originalState.heightWasPercentage?e.mapContainer.style.height=e.originalState.percentageHeight:e.mapContainer.style.height=e.originalState.mapWidth,e.originalState.widthWasAuto?e.mapContainer.style.width="auto":e.originalState.widthWasPercentage?e.mapContainer.style.width=e.originalState.percentageWidth:e.mapContainer.style.width=e.originalState.mapHeight,e._removeOuterContainer(e.mapContainer,e.outerContainer,e.blankDiv),e._map.invalidateSize(),e._map.setView(e.originalState.center),e._map.setZoom(e.originalState.zoom)),e._map.fire("easyPrint-finished",{blob:n})}).catch(function(t){console.error("Print operation failed",t)})},_sendToBrowserPrint:function(t,e){this._page.resizeTo(600,800);var n=this._createNewWindow(t,e,this);this._page.document.body.innerHTML="",this._page.document.write(n),this._page.document.close()},_createSpinner:function(t,e,n){return"<html><head><title>"+t+"</title></head><body><style>\n      body{\n        background: "+n+";\n      }\n      .epLoader,\n      .epLoader:before,\n      .epLoader:after {\n        border-radius: 50%;\n      }\n      .epLoader {\n        color: #ffffff;\n        font-size: 11px;\n        text-indent: -99999em;\n        margin: 55px auto;\n        position: relative;\n        width: 10em;\n        height: 10em;\n        box-shadow: inset 0 0 0 1em;\n        -webkit-transform: translateZ(0);\n        -ms-transform: translateZ(0);\n        transform: translateZ(0);\n      }\n      .epLoader:before,\n      .epLoader:after {\n        position: absolute;\n        content: '';\n      }\n      .epLoader:before {\n        width: 5.2em;\n        height: 10.2em;\n        background: #0dc5c1;\n        border-radius: 10.2em 0 0 10.2em;\n        top: -0.1em;\n        left: -0.1em;\n        -webkit-transform-origin: 5.2em 5.1em;\n        transform-origin: 5.2em 5.1em;\n        -webkit-animation: load2 2s infinite ease 1.5s;\n        animation: load2 2s infinite ease 1.5s;\n      }\n      .epLoader:after {\n        width: 5.2em;\n        height: 10.2em;\n        background: #0dc5c1;\n        border-radius: 0 10.2em 10.2em 0;\n        top: -0.1em;\n        left: 5.1em;\n        -webkit-transform-origin: 0px 5.1em;\n        transform-origin: 0px 5.1em;\n        -webkit-animation: load2 2s infinite ease;\n        animation: load2 2s infinite ease;\n      }\n      @-webkit-keyframes load2 {\n        0% {\n          -webkit-transform: rotate(0deg);\n          transform: rotate(0deg);\n        }\n        100% {\n          -webkit-transform: rotate(360deg);\n          transform: rotate(360deg);\n        }\n      }\n      @keyframes load2 {\n        0% {\n          -webkit-transform: rotate(0deg);\n          transform: rotate(0deg);\n        }\n        100% {\n          -webkit-transform: rotate(360deg);\n          transform: rotate(360deg);\n        }\n      }\n      </style>\n    <div class=\""+e+'">Loading...</div></body></html>'},_createNewWindow:function(t,e,n){return"<html><head>\n        <style>@media print {\n          img { max-width: 98%!important; max-height: 98%!important; }\n          @page { size: "+e+";}}\n        </style>\n        <script>function step1(){\n        setTimeout('step2()', 10);}\n        function step2(){window.print();window.close()}\n        <\/script></head><body onload='step1()'>\n        <img src=\""+t+'" style="display:block; margin:auto;"></body></html>'},_createOuterContainer:function(t){var e=document.createElement("div");return t.parentNode.insertBefore(e,t),t.parentNode.removeChild(t),e.appendChild(t),e.style.width=t.style.width,e.style.height=t.style.height,e.style.display="inline-block",e.style.overflow="hidden",e},_removeOuterContainer:function(t,e,n){e.parentNode&&(e.parentNode.insertBefore(t,e),e.parentNode.removeChild(n),e.parentNode.removeChild(e))},_addCss:function(){var t=document.createElement("style");t.type="text/css",t.innerHTML=".leaflet-control-easyPrint-button { \n      background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTYuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjE2cHgiIGhlaWdodD0iMTZweCIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMiA1MTI7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4KPGc+Cgk8cGF0aCBkPSJNMTI4LDMyaDI1NnY2NEgxMjhWMzJ6IE00ODAsMTI4SDMyYy0xNy42LDAtMzIsMTQuNC0zMiwzMnYxNjBjMCwxNy42LDE0LjM5OCwzMiwzMiwzMmg5NnYxMjhoMjU2VjM1Mmg5NiAgIGMxNy42LDAsMzItMTQuNCwzMi0zMlYxNjBDNTEyLDE0Mi40LDQ5Ny42LDEyOCw0ODAsMTI4eiBNMzUyLDQ0OEgxNjBWMjg4aDE5MlY0NDh6IE00ODcuMTk5LDE3NmMwLDEyLjgxMy0xMC4zODcsMjMuMi0yMy4xOTcsMjMuMiAgIGMtMTIuODEyLDAtMjMuMjAxLTEwLjM4Ny0yMy4yMDEtMjMuMnMxMC4zODktMjMuMiwyMy4xOTktMjMuMkM0NzYuODE0LDE1Mi44LDQ4Ny4xOTksMTYzLjE4Nyw0ODcuMTk5LDE3NnoiIGZpbGw9IiMwMDAwMDAiLz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K);\n      background-size: 16px 16px; \n      cursor: pointer; \n    }\n    .leaflet-control-easyPrint-button-export { \n      background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTYuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjE2cHgiIGhlaWdodD0iMTZweCIgdmlld0JveD0iMCAwIDQzMy41IDQzMy41IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA0MzMuNSA0MzMuNTsiIHhtbDpzcGFjZT0icHJlc2VydmUiPgo8Zz4KCTxnIGlkPSJmaWxlLWRvd25sb2FkIj4KCQk8cGF0aCBkPSJNMzk1LjI1LDE1M2gtMTAyVjBoLTE1M3YxNTNoLTEwMmwxNzguNSwxNzguNUwzOTUuMjUsMTUzeiBNMzguMjUsMzgyLjV2NTFoMzU3di01MUgzOC4yNXoiIGZpbGw9IiMwMDAwMDAiLz4KCTwvZz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K);\n      background-size: 16px 16px; \n      cursor: pointer; \n    }\n    .easyPrintHolder a {\n      background-size: 16px 16px;\n      cursor: pointer;\n    }\n    .easyPrintHolder .CurrentSize{\n      background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMTZweCIgdmVyc2lvbj0iMS4xIiBoZWlnaHQ9IjE2cHgiIHZpZXdCb3g9IjAgMCA2NCA2NCIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgNjQgNjQiPgogIDxnPgogICAgPGcgZmlsbD0iIzFEMUQxQiI+CiAgICAgIDxwYXRoIGQ9Ik0yNS4yNTUsMzUuOTA1TDQuMDE2LDU3LjE0NVY0Ni41OWMwLTEuMTA4LTAuODk3LTIuMDA4LTIuMDA4LTIuMDA4QzAuODk4LDQ0LjU4MiwwLDQ1LjQ4MSwwLDQ2LjU5djE1LjQwMiAgICBjMCwwLjI2MSwwLjA1MywwLjUyMSwwLjE1NSwwLjc2N2MwLjIwMywwLjQ5MiwwLjU5NCwwLjg4MiwxLjA4NiwxLjA4N0MxLjQ4Niw2My45NDcsMS43NDcsNjQsMi4wMDgsNjRoMTUuNDAzICAgIGMxLjEwOSwwLDIuMDA4LTAuODk4LDIuMDA4LTIuMDA4cy0wLjg5OC0yLjAwOC0yLjAwOC0yLjAwOEg2Ljg1NWwyMS4yMzgtMjEuMjRjMC43ODQtMC43ODQsMC43ODQtMi4wNTUsMC0yLjgzOSAgICBTMjYuMDM5LDM1LjEyMSwyNS4yNTUsMzUuOTA1eiIgZmlsbD0iIzAwMDAwMCIvPgogICAgICA8cGF0aCBkPSJtNjMuODQ1LDEuMjQxYy0wLjIwMy0wLjQ5MS0wLjU5NC0wLjg4Mi0xLjA4Ni0xLjA4Ny0wLjI0NS0wLjEwMS0wLjUwNi0wLjE1NC0wLjc2Ny0wLjE1NGgtMTUuNDAzYy0xLjEwOSwwLTIuMDA4LDAuODk4LTIuMDA4LDIuMDA4czAuODk4LDIuMDA4IDIuMDA4LDIuMDA4aDEwLjU1NmwtMjEuMjM4LDIxLjI0Yy0wLjc4NCwwLjc4NC0wLjc4NCwyLjA1NSAwLDIuODM5IDAuMzkyLDAuMzkyIDAuOTA2LDAuNTg5IDEuNDIsMC41ODlzMS4wMjctMC4xOTcgMS40MTktMC41ODlsMjEuMjM4LTIxLjI0djEwLjU1NWMwLDEuMTA4IDAuODk3LDIuMDA4IDIuMDA4LDIuMDA4IDEuMTA5LDAgMi4wMDgtMC44OTkgMi4wMDgtMi4wMDh2LTE1LjQwMmMwLTAuMjYxLTAuMDUzLTAuNTIyLTAuMTU1LTAuNzY3eiIgZmlsbD0iIzAwMDAwMCIvPgogICAgPC9nPgogIDwvZz4KPC9zdmc+Cg==)\n    }\n    .easyPrintHolder .page {\n      background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTguMS4xLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDQ0NC44MzMgNDQ0LjgzMyIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNDQ0LjgzMyA0NDQuODMzOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgd2lkdGg9IjUxMnB4IiBoZWlnaHQ9IjUxMnB4Ij4KPGc+Cgk8Zz4KCQk8cGF0aCBkPSJNNTUuMjUsNDQ0LjgzM2gzMzQuMzMzYzkuMzUsMCwxNy03LjY1LDE3LTE3VjEzOS4xMTdjMC00LjgxNy0xLjk4My05LjM1LTUuMzgzLTEyLjQ2N0wyNjkuNzMzLDQuNTMzICAgIEMyNjYuNjE3LDEuNywyNjIuMzY3LDAsMjU4LjExNywwSDU1LjI1Yy05LjM1LDAtMTcsNy42NS0xNywxN3Y0MTAuODMzQzM4LjI1LDQzNy4xODMsNDUuOSw0NDQuODMzLDU1LjI1LDQ0NC44MzN6ICAgICBNMzcyLjU4MywxNDYuNDgzdjAuODVIMjU2LjQxN3YtMTA4LjhMMzcyLjU4MywxNDYuNDgzeiBNNzIuMjUsMzRoMTUwLjE2N3YxMzAuMzMzYzAsOS4zNSw3LjY1LDE3LDE3LDE3aDEzMy4xNjd2MjI5LjVINzIuMjVWMzR6ICAgICIgZmlsbD0iIzAwMDAwMCIvPgoJPC9nPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+Cjwvc3ZnPgo=);\n    }\n    .easyPrintHolder .A4Landscape { \n      transform: rotate(-90deg);\n    }\n\n    .leaflet-control-easyPrint-button{\n      display: inline-block;\n    }\n    .easyPrintHolder{\n      margin-top:-31px;\n      margin-bottom: -5px;\n      margin-left: 30px;\n      padding-left: 0px;\n      display: none;\n    }\n\n    .easyPrintSizeMode {\n      display: inline-block;\n    }\n    .easyPrintHolder .easyPrintSizeMode a {\n      border-radius: 0px;\n    }\n\n    .easyPrintHolder .easyPrintSizeMode:last-child a{\n      border-top-right-radius: 2px;\n      border-bottom-right-radius: 2px;\n      margin-left: -1px;\n    }\n\n    .easyPrintPortrait:hover, .easyPrintLandscape:hover{\n      background-color: #757570;\n      cursor: pointer;\n    }",document.body.appendChild(t)},_dataURItoBlob:function(t){for(var e=atob(t.split(",")[1]),n=t.split(",")[0].split(":")[1].split(";")[0],i=new ArrayBuffer(e.length),o=new DataView(i),r=0;r<e.length;r++)o.setUint8(r,e.charCodeAt(r));return new Blob([i],{type:n})},_togglePageSizeButtons:function(t){var e=this.holder.style,n=this.link.style;"mouseover"===t.type?(e.display="block",n.borderTopRightRadius="0",n.borderBottomRightRadius="0"):(e.display="none",n.borderTopRightRadius="2px",n.borderBottomRightRadius="2px")},_toggleControls:function(t){var e=document.getElementsByClassName("leaflet-control-container")[0];if(t)return e.style.display="block";e.style.display="none"},_toggleClasses:function(t,e){t.forEach(function(t){var n=document.getElementsByClassName(t)[0];if(e)return n.style.display="block";n.style.display="none"})},_a4PageSize:{height:715,width:1045}}),L.easyPrint=function(t){return new L.Control.EasyPrint(t)}}();
-//# sourceMappingURL=bundle.js.map
+(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+(function(global) {
+    'use strict';
+
+    var util = newUtil();
+    var inliner = newInliner();
+    var fontFaces = newFontFaces();
+    var images = newImages();
+
+    // Default impl options
+    var defaultOptions = {
+        // Default is to fail on error, no placeholder
+        imagePlaceholder: undefined,
+        // Default cache bust is false, it will use the cache
+        cacheBust: false,
+        // Use (existing) authentication credentials for external URIs (CORS requests)
+        useCredentials: false
+    };
+
+    var domtoimage = {
+        toSvg: toSvg,
+        toPng: toPng,
+        toJpeg: toJpeg,
+        toBlob: toBlob,
+        toPixelData: toPixelData,
+        toCanvas: toCanvas,
+        impl: {
+            fontFaces: fontFaces,
+            images: images,
+            util: util,
+            inliner: inliner,
+            options: {}
+        }
+    };
+
+    if (typeof exports === "object" && typeof module === "object")
+        module.exports = domtoimage;
+    else
+        global.domtoimage = domtoimage;
+
+    /**
+     * @param {Node} node - The DOM Node object to render
+     * @param {Object} options - Rendering options
+     * @param {Function} options.filter - Should return true if passed node should be included in the output
+     *          (excluding node means excluding it's children as well). Not called on the root node.
+     * @param {String} options.bgcolor - color for the background, any valid CSS color value.
+     * @param {Number} options.width - width to be applied to node before rendering.
+     * @param {Number} options.height - height to be applied to node before rendering.
+     * @param {Object} options.style - an object whose properties to be copied to node's style before rendering.
+     * @param {Number} options.quality - a Number between 0 and 1 indicating image quality (applicable to JPEG only),
+                defaults to 1.0.
+     * @param {Number} options.scale - a Number multiplier to scale up the canvas before rendering to reduce fuzzy images, defaults to 1.0.
+     * @param {String} options.imagePlaceholder - dataURL to use as a placeholder for failed images, default behaviour is to fail fast on images we can't fetch
+     * @param {Boolean} options.cacheBust - set to true to cache bust by appending the time to the request url
+     * @return {Promise} - A promise that is fulfilled with a SVG image data URL
+     * */
+    function toSvg(node, options) {
+        options = options || {};
+        copyOptions(options);
+        return Promise.resolve(node)
+            .then(function(node) {
+                return cloneNode(node, options.filter, true);
+            })
+            .then(embedFonts)
+            .then(inlineImages)
+            .then(applyOptions)
+            .then(function(clone) {
+                return makeSvgDataUri(clone,
+                    options.width || util.width(node),
+                    options.height || util.height(node)
+                );
+            });
+
+        function applyOptions(clone) {
+            if (options.bgcolor) clone.style.backgroundColor = options.bgcolor;
+            if (options.width) clone.style.width = options.width + 'px';
+            if (options.height) clone.style.height = options.height + 'px';
+
+            if (options.style)
+                Object.keys(options.style).forEach(function(property) {
+                    clone.style[property] = options.style[property];
+                });
+
+            return clone;
+        }
+    }
+
+    /**
+     * @param {Node} node - The DOM Node object to render
+     * @param {Object} options - Rendering options, @see {@link toSvg}
+     * @return {Promise} - A promise that is fulfilled with a Uint8Array containing RGBA pixel data.
+     * */
+    function toPixelData(node, options) {
+        return draw(node, options || {})
+            .then(function(canvas) {
+                return canvas.getContext('2d').getImageData(
+                    0,
+                    0,
+                    util.width(node),
+                    util.height(node)
+                ).data;
+            });
+    }
+
+    /**
+     * @param {Node} node - The DOM Node object to render
+     * @param {Object} options - Rendering options, @see {@link toSvg}
+     * @return {Promise} - A promise that is fulfilled with a PNG image data URL
+     * */
+    function toPng(node, options) {
+        return draw(node, options || {})
+            .then(function(canvas) {
+                return canvas.toDataURL();
+            });
+    }
+
+    /**
+     * @param {Node} node - The DOM Node object to render
+     * @param {Object} options - Rendering options, @see {@link toSvg}
+     * @return {Promise} - A promise that is fulfilled with a JPEG image data URL
+     * */
+    function toJpeg(node, options) {
+        options = options || {};
+        return draw(node, options)
+            .then(function(canvas) {
+                return canvas.toDataURL('image/jpeg', options.quality || 1.0);
+            });
+    }
+
+    /**
+     * @param {Node} node - The DOM Node object to render
+     * @param {Object} options - Rendering options, @see {@link toSvg}
+     * @return {Promise} - A promise that is fulfilled with a PNG image blob
+     * */
+    function toBlob(node, options) {
+        return draw(node, options || {})
+            .then(util.canvasToBlob);
+    }
+
+    /**
+     * @param {Node} node - The DOM Node object to render
+     * @param {Object} options - Rendering options, @see {@link toSvg}
+     * @return {Promise} - A promise that is fulfilled with a canvas object
+     * */
+    function toCanvas(node, options) {
+        return draw(node, options || {});
+    }
+
+    function copyOptions(options) {
+        // Copy options to impl options for use in impl
+        if (typeof(options.imagePlaceholder) === 'undefined') {
+            domtoimage.impl.options.imagePlaceholder = defaultOptions.imagePlaceholder;
+        } else {
+            domtoimage.impl.options.imagePlaceholder = options.imagePlaceholder;
+        }
+
+        if (typeof(options.cacheBust) === 'undefined') {
+            domtoimage.impl.options.cacheBust = defaultOptions.cacheBust;
+        } else {
+            domtoimage.impl.options.cacheBust = options.cacheBust;
+        }
+
+        if(typeof(options.useCredentials) === 'undefined') {
+            domtoimage.impl.options.useCredentials = defaultOptions.useCredentials;
+        } else {
+            domtoimage.impl.options.useCredentials = options.useCredentials;
+        }
+    }
+
+    function draw(domNode, options) {
+        return toSvg(domNode, options)
+            .then(util.makeImage)
+            .then(util.delay(100))
+            .then(function(image) {
+                var scale = typeof(options.scale) !== 'number' ? 1 : options.scale;
+                var canvas = newCanvas(domNode, scale);
+                var ctx = canvas.getContext('2d');
+                if (image) {
+                    ctx.scale(scale, scale);
+                    ctx.drawImage(image, 0, 0);
+                }
+                return canvas;
+            });
+
+        function newCanvas(domNode, scale) {
+            var canvas = document.createElement('canvas');
+            canvas.width = (options.width || util.width(domNode)) * scale;
+            canvas.height = (options.height || util.height(domNode)) * scale;
+
+            if (options.bgcolor) {
+                var ctx = canvas.getContext('2d');
+                ctx.fillStyle = options.bgcolor;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            }
+
+            return canvas;
+        }
+    }
+
+    function cloneNode(node, filter, root) {
+        if (!root && filter && !filter(node)) return Promise.resolve();
+
+        return Promise.resolve(node)
+            .then(makeNodeCopy)
+            .then(function(clone) {
+                return cloneChildren(node, clone, filter);
+            })
+            .then(function(clone) {
+                return processClone(node, clone);
+            });
+
+        function makeNodeCopy(node) {
+            if (node instanceof HTMLCanvasElement) return util.makeImage(node.toDataURL());
+            return node.cloneNode(false);
+        }
+
+        function cloneChildren(original, clone, filter) {
+            var children = original.childNodes;
+            if (children.length === 0) return Promise.resolve(clone);
+
+            return cloneChildrenInOrder(clone, util.asArray(children), filter)
+                .then(function() {
+                    return clone;
+                });
+
+            function cloneChildrenInOrder(parent, children, filter) {
+                var done = Promise.resolve();
+                children.forEach(function(child) {
+                    done = done
+                        .then(function() {
+                            return cloneNode(child, filter);
+                        })
+                        .then(function(childClone) {
+                            if (childClone) parent.appendChild(childClone);
+                        });
+                });
+                return done;
+            }
+        }
+
+        function processClone(original, clone) {
+            if (!(clone instanceof Element)) return clone;
+
+            return Promise.resolve()
+                .then(cloneStyle)
+                .then(clonePseudoElements)
+                .then(copyUserInput)
+                .then(fixSvg)
+                .then(function() {
+                    return clone;
+                });
+
+            function cloneStyle() {
+                copyStyle(window.getComputedStyle(original), clone.style);
+
+                function copyStyle(source, target) {
+                    if (source.cssText) {
+                        target.cssText = source.cssText;
+                        target.font = source.font; // here, we re-assign the font prop.
+                    } else copyProperties(source, target);
+
+                    function copyProperties(source, target) {
+                        util.asArray(source).forEach(function(name) {
+                            target.setProperty(
+                                name,
+                                source.getPropertyValue(name),
+                                source.getPropertyPriority(name)
+                            );
+                        });
+                    }
+                }
+            }
+
+            function clonePseudoElements() {
+                [':before', ':after'].forEach(function(element) {
+                    clonePseudoElement(element);
+                });
+
+                function clonePseudoElement(element) {
+                    var style = window.getComputedStyle(original, element);
+                    var content = style.getPropertyValue('content');
+
+                    if (content === '' || content === 'none') return;
+
+                    var className = util.uid();
+                    var currentClass = clone.getAttribute('class');
+                    if (currentClass) {
+                        clone.setAttribute('class', currentClass + ' ' + className);
+                    }
+
+                    var styleElement = document.createElement('style');
+                    styleElement.appendChild(formatPseudoElementStyle(className, element, style));
+                    clone.appendChild(styleElement);
+
+                    function formatPseudoElementStyle(className, element, style) {
+                        var selector = '.' + className + ':' + element;
+                        var cssText = style.cssText ? formatCssText(style) : formatCssProperties(style);
+                        return document.createTextNode(selector + '{' + cssText + '}');
+
+                        function formatCssText(style) {
+                            var content = style.getPropertyValue('content');
+                            return style.cssText + ' content: ' + content + ';';
+                        }
+
+                        function formatCssProperties(style) {
+
+                            return util.asArray(style)
+                                .map(formatProperty)
+                                .join('; ') + ';';
+
+                            function formatProperty(name) {
+                                return name + ': ' +
+                                    style.getPropertyValue(name) +
+                                    (style.getPropertyPriority(name) ? ' !important' : '');
+                            }
+                        }
+                    }
+                }
+            }
+
+            function copyUserInput() {
+                if (original instanceof HTMLTextAreaElement) clone.innerHTML = original.value;
+                if (original instanceof HTMLInputElement) clone.setAttribute("value", original.value);
+            }
+
+            function fixSvg() {
+                if (!(clone instanceof SVGElement)) return;
+                clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+
+                if (!(clone instanceof SVGRectElement)) return;
+                ['width', 'height'].forEach(function(attribute) {
+                    var value = clone.getAttribute(attribute);
+                    if (!value) return;
+
+                    clone.style.setProperty(attribute, value);
+                });
+            }
+        }
+    }
+
+    function embedFonts(node) {
+        return fontFaces.resolveAll()
+            .then(function(cssText) {
+                var styleNode = document.createElement('style');
+                node.appendChild(styleNode);
+                styleNode.appendChild(document.createTextNode(cssText));
+                return node;
+            });
+    }
+
+    function inlineImages(node) {
+        return images.inlineAll(node)
+            .then(function() {
+                return node;
+            });
+    }
+
+    function makeSvgDataUri(node, width, height) {
+        return Promise.resolve(node)
+            .then(function(node) {
+                node.setAttribute('xmlns', 'http://www.w3.org/1999/xhtml');
+                return new XMLSerializer().serializeToString(node);
+            })
+            .then(util.escapeXhtml)
+            .then(function(xhtml) {
+                return '<foreignObject x="0" y="0" width="100%" height="100%">' + xhtml + '</foreignObject>';
+            })
+            .then(function(foreignObject) {
+                return '<svg xmlns="http://www.w3.org/2000/svg" width="' + width + '" height="' + height + '">' +
+                    foreignObject + '</svg>';
+            })
+            .then(function(svg) {
+                return 'data:image/svg+xml;charset=utf-8,' + svg;
+            });
+    }
+
+    function newUtil() {
+        return {
+            escape: escape,
+            parseExtension: parseExtension,
+            mimeType: mimeType,
+            dataAsUrl: dataAsUrl,
+            isDataUrl: isDataUrl,
+            canvasToBlob: canvasToBlob,
+            resolveUrl: resolveUrl,
+            getAndEncode: getAndEncode,
+            uid: uid(),
+            delay: delay,
+            asArray: asArray,
+            escapeXhtml: escapeXhtml,
+            makeImage: makeImage,
+            width: width,
+            height: height
+        };
+
+        function mimes() {
+            /*
+             * Only WOFF and EOT mime types for fonts are 'real'
+             * see http://www.iana.org/assignments/media-types/media-types.xhtml
+             */
+            var WOFF = 'application/font-woff';
+            var JPEG = 'image/jpeg';
+
+            return {
+                'woff': WOFF,
+                'woff2': WOFF,
+                'ttf': 'application/font-truetype',
+                'eot': 'application/vnd.ms-fontobject',
+                'png': 'image/png',
+                'jpg': JPEG,
+                'jpeg': JPEG,
+                'gif': 'image/gif',
+                'tiff': 'image/tiff',
+                'svg': 'image/svg+xml'
+            };
+        }
+
+        function parseExtension(url) {
+            var match = /\.([^\.\/]*?)(\?|$)/g.exec(url);
+            if (match) return match[1];
+            else return '';
+        }
+
+        function mimeType(url) {
+            var extension = parseExtension(url).toLowerCase();
+            return mimes()[extension] || '';
+        }
+
+        function isDataUrl(url) {
+            return url.search(/^(data:)/) !== -1;
+        }
+
+        function toBlob(canvas) {
+            return new Promise(function(resolve) {
+                var binaryString = window.atob(canvas.toDataURL().split(',')[1]);
+                var length = binaryString.length;
+                var binaryArray = new Uint8Array(length);
+
+                for (var i = 0; i < length; i++)
+                    binaryArray[i] = binaryString.charCodeAt(i);
+
+                resolve(new Blob([binaryArray], {
+                    type: 'image/png'
+                }));
+            });
+        }
+
+        function canvasToBlob(canvas) {
+            if (canvas.toBlob)
+                return new Promise(function(resolve) {
+                    canvas.toBlob(resolve);
+                });
+
+            return toBlob(canvas);
+        }
+
+        function resolveUrl(url, baseUrl) {
+            var doc = document.implementation.createHTMLDocument();
+            var base = doc.createElement('base');
+            doc.head.appendChild(base);
+            var a = doc.createElement('a');
+            doc.body.appendChild(a);
+            base.href = baseUrl;
+            a.href = url;
+            return a.href;
+        }
+
+        function uid() {
+            var index = 0;
+
+            return function() {
+                return 'u' + fourRandomChars() + index++;
+
+                function fourRandomChars() {
+                    /* see http://stackoverflow.com/a/6248722/2519373 */
+                    return ('0000' + (Math.random() * Math.pow(36, 4) << 0).toString(36)).slice(-4);
+                }
+            };
+        }
+
+        function makeImage(uri) {
+            if (uri === 'data:,') return Promise.resolve();
+            return new Promise(function(resolve, reject) {
+                var image = new Image();
+                if(domtoimage.impl.options.useCredentials) {
+                    image.crossOrigin = 'use-credentials';
+                }
+                image.onload = function() {
+                    resolve(image);
+                };
+                image.onerror = reject;
+                image.src = uri;
+            });
+        }
+
+        function getAndEncode(url) {
+            var TIMEOUT = 30000;
+            if (domtoimage.impl.options.cacheBust) {
+                // Cache bypass so we dont have CORS issues with cached images
+                // Source: https://developer.mozilla.org/en/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest#Bypassing_the_cache
+                url += ((/\?/).test(url) ? "&" : "?") + (new Date()).getTime();
+            }
+
+            return new Promise(function(resolve) {
+                var request = new XMLHttpRequest();
+
+                request.onreadystatechange = done;
+                request.ontimeout = timeout;
+                request.responseType = 'blob';
+                request.timeout = TIMEOUT;
+                if(domtoimage.impl.options.useCredentials) {
+                    request.withCredentials = true;
+                }
+                request.open('GET', url, true);
+                request.send();
+
+                var placeholder;
+                if (domtoimage.impl.options.imagePlaceholder) {
+                    var split = domtoimage.impl.options.imagePlaceholder.split(/,/);
+                    if (split && split[1]) {
+                        placeholder = split[1];
+                    }
+                }
+
+                function done() {
+                    if (request.readyState !== 4) return;
+
+                    if (request.status !== 200) {
+                        if (placeholder) {
+                            resolve(placeholder);
+                        } else {
+                            fail('cannot fetch resource: ' + url + ', status: ' + request.status);
+                        }
+
+                        return;
+                    }
+
+                    var encoder = new FileReader();
+                    encoder.onloadend = function() {
+                        var content = encoder.result.split(/,/)[1];
+                        resolve(content);
+                    };
+                    encoder.readAsDataURL(request.response);
+                }
+
+                function timeout() {
+                    if (placeholder) {
+                        resolve(placeholder);
+                    } else {
+                        fail('timeout of ' + TIMEOUT + 'ms occured while fetching resource: ' + url);
+                    }
+                }
+
+                function fail(message) {
+                    console.error(message);
+                    resolve('');
+                }
+            });
+        }
+
+        function dataAsUrl(content, type) {
+            return 'data:' + type + ';base64,' + content;
+        }
+
+        function escape(string) {
+            return string.replace(/([.*+?^${}()|\[\]\/\\])/g, '\\$1');
+        }
+
+        function delay(ms) {
+            return function(arg) {
+                return new Promise(function(resolve) {
+                    setTimeout(function() {
+                        resolve(arg);
+                    }, ms);
+                });
+            };
+        }
+
+        function asArray(arrayLike) {
+            var array = [];
+            var length = arrayLike.length;
+            for (var i = 0; i < length; i++) array.push(arrayLike[i]);
+            return array;
+        }
+
+        function escapeXhtml(string) {
+            return string.replace(/#/g, '%23').replace(/\n/g, '%0A');
+        }
+
+        function width(node) {
+            var leftBorder = px(node, 'border-left-width');
+            var rightBorder = px(node, 'border-right-width');
+            return node.scrollWidth + leftBorder + rightBorder;
+        }
+
+        function height(node) {
+            var topBorder = px(node, 'border-top-width');
+            var bottomBorder = px(node, 'border-bottom-width');
+            return node.scrollHeight + topBorder + bottomBorder;
+        }
+
+        function px(node, styleProperty) {
+            var value = window.getComputedStyle(node).getPropertyValue(styleProperty);
+            return parseFloat(value.replace('px', ''));
+        }
+    }
+
+    function newInliner() {
+        var URL_REGEX = /url\(['"]?([^'"]+?)['"]?\)/g;
+
+        return {
+            inlineAll: inlineAll,
+            shouldProcess: shouldProcess,
+            impl: {
+                readUrls: readUrls,
+                inline: inline
+            }
+        };
+
+        function shouldProcess(string) {
+            return string.search(URL_REGEX) !== -1;
+        }
+
+        function readUrls(string) {
+            var result = [];
+            var match;
+            while ((match = URL_REGEX.exec(string)) !== null) {
+                result.push(match[1]);
+            }
+            return result.filter(function(url) {
+                return !util.isDataUrl(url);
+            });
+        }
+
+        function inline(string, url, baseUrl, get) {
+            return Promise.resolve(url)
+                .then(function(url) {
+                    return baseUrl ? util.resolveUrl(url, baseUrl) : url;
+                })
+                .then(get || util.getAndEncode)
+                .then(function(data) {
+                    return util.dataAsUrl(data, util.mimeType(url));
+                })
+                .then(function(dataUrl) {
+                    return string.replace(urlAsRegex(url), '$1' + dataUrl + '$3');
+                });
+
+            function urlAsRegex(url) {
+                return new RegExp('(url\\([\'"]?)(' + util.escape(url) + ')([\'"]?\\))', 'g');
+            }
+        }
+
+        function inlineAll(string, baseUrl, get) {
+            if (nothingToInline()) return Promise.resolve(string);
+
+            return Promise.resolve(string)
+                .then(readUrls)
+                .then(function(urls) {
+                    var done = Promise.resolve(string);
+                    urls.forEach(function(url) {
+                        done = done.then(function(string) {
+                            return inline(string, url, baseUrl, get);
+                        });
+                    });
+                    return done;
+                });
+
+            function nothingToInline() {
+                return !shouldProcess(string);
+            }
+        }
+    }
+
+    function newFontFaces() {
+        return {
+            resolveAll: resolveAll,
+            impl: {
+                readAll: readAll
+            }
+        };
+
+        function resolveAll() {
+            return readAll(document)
+                .then(function(webFonts) {
+                    return Promise.all(
+                        webFonts.map(function(webFont) {
+                            return webFont.resolve();
+                        })
+                    );
+                })
+                .then(function(cssStrings) {
+                    return cssStrings.join('\n');
+                });
+        }
+
+        function readAll() {
+            return Promise.resolve(util.asArray(document.styleSheets))
+                .then(getCssRules)
+                .then(selectWebFontRules)
+                .then(function(rules) {
+                    return rules.map(newWebFont);
+                });
+
+            function selectWebFontRules(cssRules) {
+                return cssRules
+                    .filter(function(rule) {
+                        return rule.type === CSSRule.FONT_FACE_RULE;
+                    })
+                    .filter(function(rule) {
+                        return inliner.shouldProcess(rule.style.getPropertyValue('src'));
+                    });
+            }
+
+            function getCssRules(styleSheets) {
+                var cssRules = [];
+                styleSheets.forEach(function(sheet) {
+                    if (sheet.hasOwnProperty("cssRules")) {
+                        try {
+                            util.asArray(sheet.cssRules || []).forEach(cssRules.push.bind(cssRules));
+                        } catch (e) {
+                            console.log('Error while reading CSS rules from ' + sheet.href, e.toString());
+                        }
+                    }
+                });
+                return cssRules;
+            }
+
+            function newWebFont(webFontRule) {
+                return {
+                    resolve: function resolve() {
+                        var baseUrl = (webFontRule.parentStyleSheet || {}).href;
+                        return inliner.inlineAll(webFontRule.cssText, baseUrl);
+                    },
+                    src: function() {
+                        return webFontRule.style.getPropertyValue('src');
+                    }
+                };
+            }
+        }
+    }
+
+    function newImages() {
+        return {
+            inlineAll: inlineAll,
+            impl: {
+                newImage: newImage
+            }
+        };
+
+        function newImage(element) {
+            return {
+                inline: inline
+            };
+
+            function inline(get) {
+                if (util.isDataUrl(element.src)) return Promise.resolve();
+
+                return Promise.resolve(element.src)
+                    .then(get || util.getAndEncode)
+                    .then(function(data) {
+                        return util.dataAsUrl(data, util.mimeType(element.src));
+                    })
+                    .then(function(dataUrl) {
+                        return new Promise(function(resolve, reject) {
+                            element.onload = resolve;
+                            // for any image with invalid src(such as <img src />), just ignore it
+                            element.onerror = resolve;
+                            element.src = dataUrl;
+                        });
+                    });
+            }
+        }
+
+        function inlineAll(node) {
+            if (!(node instanceof Element)) return Promise.resolve(node);
+
+            return inlineBackground(node)
+                .then(function() {
+                    if (node instanceof HTMLImageElement)
+                        return newImage(node).inline();
+                    else
+                        return Promise.all(
+                            util.asArray(node.childNodes).map(function(child) {
+                                return inlineAll(child);
+                            })
+                        );
+                });
+
+            function inlineBackground(node) {
+                var background = node.style.getPropertyValue('background');
+
+                if (!background) return Promise.resolve(node);
+
+                return inliner.inlineAll(background)
+                    .then(function(inlined) {
+                        node.style.setProperty(
+                            'background',
+                            inlined,
+                            node.style.getPropertyPriority('background')
+                        );
+                    })
+                    .then(function() {
+                        return node;
+                    });
+            }
+        }
+    }
+})(this);
+
+},{}],2:[function(require,module,exports){
+(function (global){(function (){
+(function(a,b){if("function"==typeof define&&define.amd)define([],b);else if("undefined"!=typeof exports)b();else{b(),a.FileSaver={exports:{}}.exports}})(this,function(){"use strict";function b(a,b){return"undefined"==typeof b?b={autoBom:!1}:"object"!=typeof b&&(console.warn("Deprecated: Expected third argument to be a object"),b={autoBom:!b}),b.autoBom&&/^\s*(?:text\/\S*|application\/xml|\S*\/\S*\+xml)\s*;.*charset\s*=\s*utf-8/i.test(a.type)?new Blob(["\uFEFF",a],{type:a.type}):a}function c(a,b,c){var d=new XMLHttpRequest;d.open("GET",a),d.responseType="blob",d.onload=function(){g(d.response,b,c)},d.onerror=function(){console.error("could not download file")},d.send()}function d(a){var b=new XMLHttpRequest;b.open("HEAD",a,!1);try{b.send()}catch(a){}return 200<=b.status&&299>=b.status}function e(a){try{a.dispatchEvent(new MouseEvent("click"))}catch(c){var b=document.createEvent("MouseEvents");b.initMouseEvent("click",!0,!0,window,0,0,0,80,20,!1,!1,!1,!1,0,null),a.dispatchEvent(b)}}var f="object"==typeof window&&window.window===window?window:"object"==typeof self&&self.self===self?self:"object"==typeof global&&global.global===global?global:void 0,a=/Macintosh/.test(navigator.userAgent)&&/AppleWebKit/.test(navigator.userAgent)&&!/Safari/.test(navigator.userAgent),g=f.saveAs||("object"!=typeof window||window!==f?function(){}:"download"in HTMLAnchorElement.prototype&&!a?function(b,g,h){var i=f.URL||f.webkitURL,j=document.createElement("a");g=g||b.name||"download",j.download=g,j.rel="noopener","string"==typeof b?(j.href=b,j.origin===location.origin?e(j):d(j.href)?c(b,g,h):e(j,j.target="_blank")):(j.href=i.createObjectURL(b),setTimeout(function(){i.revokeObjectURL(j.href)},4E4),setTimeout(function(){e(j)},0))}:"msSaveOrOpenBlob"in navigator?function(f,g,h){if(g=g||f.name||"download","string"!=typeof f)navigator.msSaveOrOpenBlob(b(f,h),g);else if(d(f))c(f,g,h);else{var i=document.createElement("a");i.href=f,i.target="_blank",setTimeout(function(){e(i)})}}:function(b,d,e,g){if(g=g||open("","_blank"),g&&(g.document.title=g.document.body.innerText="downloading..."),"string"==typeof b)return c(b,d,e);var h="application/octet-stream"===b.type,i=/constructor/i.test(f.HTMLElement)||f.safari,j=/CriOS\/[\d]+/.test(navigator.userAgent);if((j||h&&i||a)&&"undefined"!=typeof FileReader){var k=new FileReader;k.onloadend=function(){var a=k.result;a=j?a:a.replace(/^data:[^;]*;/,"data:attachment/file;"),g?g.location.href=a:location=a,g=null},k.readAsDataURL(b)}else{var l=f.URL||f.webkitURL,m=l.createObjectURL(b);g?g.location=m:location.href=m,g=null,setTimeout(function(){l.revokeObjectURL(m)},4E4)}});f.saveAs=g.saveAs=g,"undefined"!=typeof module&&(module.exports=g)});
+
+
+}).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{}],3:[function(require,module,exports){
+var domtoimage = require('dom-to-image-more');
+var fileSaver = require('file-saver');
+
+L.Control.EasyPrint = L.Control.extend({
+  options: {
+    title: 'Print map',
+    position: 'topleft',
+    sizeModes: ['Current'],
+    filename: 'map',
+    outputMode: 'blob', //[print, download, blob] 
+    hidden: false,
+    tileWait: 500,
+    hideControlContainer: true,
+    hideClasses: [],
+    customWindowTitle: window.document.title,
+    spinnerBgCOlor: '#0DC5C1',
+    customSpinnerClass: 'epLoader',
+    defaultSizeTitles: {
+      Current: 'Current Size',
+      A4Landscape: 'A4 Landscape',
+      A4Portrait: 'A4 Portrait'
+    }
+  },
+
+  onAdd: function () { 
+    this.mapContainer = this._map.getContainer();
+    this.options.sizeModes = this.options.sizeModes.map(function (sizeMode) {
+      if (sizeMode === 'Current') {
+        return {
+          name: this.options.defaultSizeTitles.Current,
+          className: 'CurrentSize'
+        }
+      }
+      if (sizeMode === 'A4Landscape') {
+        return {
+          height: this._a4PageSize.height,
+          width: this._a4PageSize.width,
+          name: this.options.defaultSizeTitles.A4Landscape,
+          className: 'A4Landscape page'
+        }
+      }
+      if (sizeMode === 'A4Portrait') {
+        return {
+          height: this._a4PageSize.width,
+          width: this._a4PageSize.height,
+          name: this.options.defaultSizeTitles.A4Portrait,
+          className: 'A4Portrait page'
+        }
+      };
+      return sizeMode;
+    }, this);
+    
+    var container = L.DomUtil.create('div', 'leaflet-control-easyPrint leaflet-bar leaflet-control');
+    if (!this.options.hidden) {
+      this._addCss();
+
+      L.DomEvent.addListener(container, 'mouseover', this._togglePageSizeButtons, this);
+      L.DomEvent.addListener(container, 'mouseout', this._togglePageSizeButtons, this);
+      L.DomEvent.on(container, "click", function (ev) {L.DomEvent.stopPropagation (ev)});
+      
+      var btnClass = 'leaflet-control-easyPrint-button'
+      if (this.options.outputMode === 'download') btnClass = btnClass + '-export'
+
+      this.link = L.DomUtil.create('a', btnClass, container);
+      this.link.id = "leafletEasyPrint";
+      this.link.title = this.options.title;
+      this.holder = L.DomUtil.create('ul', 'easyPrintHolder', container);
+
+      this.options.sizeModes.forEach(function (sizeMode) {
+        var btn = L.DomUtil.create('li', 'easyPrintSizeMode', this.holder);
+        btn.title = sizeMode.name;
+        var link = L.DomUtil.create('a', sizeMode.className, btn);
+        L.DomEvent.addListener(btn, 'click', this.printMap, this);
+      }, this);
+
+      L.DomEvent.disableClickPropagation(container);
+    }
+    return container;
+  },
+
+  printMap: async function (event, filename) {
+    if (filename) {
+      this.options.filename = filename
+    }
+    if (this.options.outputMode === 'print') {
+      this._page = window.open("", "_blank", 'toolbar=no,status=no,menubar=no,scrollbars=no,resizable=no,left=10, top=10, width=200, height=250, visible=none');
+      this._page.document.write(this._createSpinner(this.options.customWindowTitle, this.options.customSpinnerClass, this.options.spinnerBgCOlor));
+    }
+    this.originalState = {
+      mapWidth: this.mapContainer.style.width,
+	  mapHeight: this.mapContainer.style.height,
+      widthWasAuto: false,
+      heightWasAuto: false,
+      widthWasPercentage: false,
+      heightWasPercentage: false,
+      zoom: this._map.getZoom(),
+      center: this._map.getCenter()
+    };
+    
+    if (this.originalState.mapWidth === 'auto') {
+        this.originalState.mapWidth = this._map.getSize().x  + 'px'
+      this.originalState.widthWasAuto = true
+    } else if (this.originalState.mapWidth.includes('%')) {
+      this.originalState.percentageWidth = this.originalState.mapWidth
+      this.originalState.widthWasPercentage = true
+      this.originalState.mapWidth = this._map.getSize().x  + 'px'
+    } else {
+        this.originalState.mapWidth = this._map.getSize().x  + 'px'
+    }
+    
+    if (this.originalState.mapHeight === 'auto') {
+        this.originalState.mapHeight = this._map.getSize().y  + 'px'
+      this.originalState.heightWasAuto = true
+    } else if (this.originalState.mapHeight.includes('%')) {
+      this.originalState.percentageHeight = this.originalState.mapHeight
+      this.originalState.heightWasPercentage = true
+      this.originalState.mapHeight = this._map.getSize().y  + 'px'
+    } else {
+        this.originalState.mapHeight = this._map.getSize().y  + 'px'
+    }
+    
+    this._map.fire("easyPrint-start", { event: event });
+    if (!this.options.hidden) {
+      this._togglePageSizeButtons({type: null});
+    }
+    if (this.options.hideControlContainer) {
+      this._toggleControls();    
+    }
+    if (this.options.hideClasses) {
+      this._toggleClasses(this.options.hideClasses);
+    }
+    var sizeMode = typeof event !== 'string' ? event.target.className : event;
+    if (sizeMode === 'CurrentSize') {
+      return await this._printOpertion(sizeMode);
+    }
+    this.outerContainer = this._createOuterContainer(this.mapContainer)
+    if (this.originalState.widthWasAuto) {
+        this.outerContainer.style.width = this.originalState.mapWidth
+        this.outerContainer.style.height = this.originalState.mapheight
+    }
+    this._createImagePlaceholder(sizeMode)
+  },
+
+  _createImagePlaceholder: function (sizeMode) {
+    var plugin = this;
+    domtoimage.toPng(this.mapContainer, {
+        width: parseInt(this.originalState.mapWidth.replace('px')),
+        height: parseInt(this.originalState.mapHeight.replace('px'))
+      })
+      .then(function (dataUrl) {
+        plugin.blankDiv = document.createElement("div");
+        var blankDiv = plugin.blankDiv;
+        plugin.outerContainer.parentElement.insertBefore(blankDiv, plugin.outerContainer);
+        blankDiv.className = 'epHolder';
+        blankDiv.style.backgroundImage = 'url("' + dataUrl + '")';
+        blankDiv.style.position = 'absolute';
+        blankDiv.style.zIndex = 1011;
+        blankDiv.style.display = 'initial';
+        blankDiv.style.width = plugin.originalState.mapWidth;
+        blankDiv.style.height = plugin.originalState.mapHeight;
+        plugin._resizeAndPrintMap(sizeMode);
+      })
+      .catch(function (error) {
+          console.error('oops, something went wrong!', error);
+      });
+  },
+
+  _resizeAndPrintMap: function (sizeMode) {
+    this.outerContainer.style.opacity = 0;
+    var pageSize = this.options.sizeModes.filter(function (item) {
+      return item.className.indexOf(sizeMode) > -1;
+    });
+    pageSize = pageSize[0]
+    this.mapContainer.style.width = pageSize.width + 'px';
+    this.mapContainer.style.height = pageSize.height + 'px';
+    if (this.mapContainer.style.width > this.mapContainer.style.height) {
+      this.orientation = 'portrait';
+    } else {
+      this.orientation = 'landscape';
+    }
+    this._map.setView(this.originalState.center);
+    this._map.setZoom(this.originalState.zoom);
+    this._map.invalidateSize();
+    if (this.options.tileLayer) {
+      this._pausePrint(sizeMode)
+    } else {
+      this._printOpertion(sizeMode)
+    }
+  },
+
+  _pausePrint: function (sizeMode) {
+    var plugin = this
+    var loadingTest = setInterval(function () { 
+      if(!plugin.options.tileLayer.isLoading()) {
+        clearInterval(loadingTest);
+        plugin._printOpertion(sizeMode)
+      }
+    }, plugin.options.tileWait);
+  },
+
+  _printOpertion: async function (sizemode) {
+    var plugin = this;
+    var widthForExport = this.mapContainer.style.width
+    var heightForExport = this.mapContainer.style.height
+    if (sizemode === 'CurrentSize') {
+        widthForExport = this.originalState.mapWidth
+        heightForExport = this.originalState.mapHeight
+    }
+    await domtoimage.toPng(plugin.mapContainer, {
+        width: parseInt(widthForExport.replace('px')),
+        height: parseInt(heightForExport.replace('px'))
+      })
+      .then(function (dataUrl) {
+          var blob = plugin._dataURItoBlob(dataUrl);
+          if (plugin.options.outputMode === 'download') {
+            fileSaver.saveAs(blob, plugin.options.filename + '.png');
+          } else if (plugin.options.outputMode === 'print') {
+            plugin._sendToBrowserPrint(dataUrl, plugin.orientation);
+          }
+          plugin._toggleControls(true);
+          plugin._toggleClasses(plugin.options.hideClasses, true);
+
+          if (plugin.outerContainer) {
+            if (plugin.originalState.heightWasAuto) {
+              plugin.mapContainer.style.height = 'auto'
+            } else if (plugin.originalState.heightWasPercentage) {
+              plugin.mapContainer.style.height = plugin.originalState.percentageHeight
+            } else {
+              plugin.mapContainer.style.height = plugin.originalState.mapWidth;              
+            }
+            if (plugin.originalState.widthWasAuto) {
+                plugin.mapContainer.style.width = 'auto'
+            } else if (plugin.originalState.widthWasPercentage) {
+                plugin.mapContainer.style.width = plugin.originalState.percentageWidth
+            } else {
+                plugin.mapContainer.style.width = plugin.originalState.mapHeight;              
+            }
+            
+            plugin._removeOuterContainer(plugin.mapContainer, plugin.outerContainer, plugin.blankDiv)
+            plugin._map.invalidateSize();
+            plugin._map.setView(plugin.originalState.center);
+            plugin._map.setZoom(plugin.originalState.zoom);
+          }
+          
+          plugin._map.fire("easyPrint-finished", {blob: blob});
+          
+          return blob;
+      })
+      .catch(function (error) {
+          console.error('Print operation failed', error);
+      }); 
+  },
+
+  _sendToBrowserPrint: function (img, orientation) {
+    this._page.resizeTo(600, 800); 
+    var pageContent = this._createNewWindow(img, orientation, this)
+    this._page.document.body.innerHTML = ''
+    this._page.document.write(pageContent);
+    this._page.document.close();  
+  },
+
+  _createSpinner: function (title, spinnerClass, spinnerColor) {
+    return `<html><head><title>`+ title + `</title></head><body><style>
+      body{
+        background: ` + spinnerColor + `;
+      }
+      .epLoader,
+      .epLoader:before,
+      .epLoader:after {
+        border-radius: 50%;
+      }
+      .epLoader {
+        color: #ffffff;
+        font-size: 11px;
+        text-indent: -99999em;
+        margin: 55px auto;
+        position: relative;
+        width: 10em;
+        height: 10em;
+        box-shadow: inset 0 0 0 1em;
+        -webkit-transform: translateZ(0);
+        -ms-transform: translateZ(0);
+        transform: translateZ(0);
+      }
+      .epLoader:before,
+      .epLoader:after {
+        position: absolute;
+        content: '';
+      }
+      .epLoader:before {
+        width: 5.2em;
+        height: 10.2em;
+        background: #0dc5c1;
+        border-radius: 10.2em 0 0 10.2em;
+        top: -0.1em;
+        left: -0.1em;
+        -webkit-transform-origin: 5.2em 5.1em;
+        transform-origin: 5.2em 5.1em;
+        -webkit-animation: load2 2s infinite ease 1.5s;
+        animation: load2 2s infinite ease 1.5s;
+      }
+      .epLoader:after {
+        width: 5.2em;
+        height: 10.2em;
+        background: #0dc5c1;
+        border-radius: 0 10.2em 10.2em 0;
+        top: -0.1em;
+        left: 5.1em;
+        -webkit-transform-origin: 0px 5.1em;
+        transform-origin: 0px 5.1em;
+        -webkit-animation: load2 2s infinite ease;
+        animation: load2 2s infinite ease;
+      }
+      @-webkit-keyframes load2 {
+        0% {
+          -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+        }
+        100% {
+          -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+        }
+      }
+      @keyframes load2 {
+        0% {
+          -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+        }
+        100% {
+          -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+        }
+      }
+      </style>
+    <div class="`+spinnerClass+`">Loading...</div></body></html>`;
+  },
+
+  _createNewWindow: function (img, orientation, plugin) {
+    return `<html><head>
+        <style>@media print {
+          img { max-width: 98%!important; max-height: 98%!important; }
+          @page { size: ` + orientation + `;}}
+        </style>
+        <script>function step1(){
+        setTimeout('step2()', 10);}
+        function step2(){window.print();window.close()}
+        </script></head><body onload='step1()'>
+        <img src="` + img + `" style="display:block; margin:auto;"></body></html>`;
+  },
+
+  _createOuterContainer: function (mapDiv) {
+    var outerContainer = document.createElement('div'); 
+    mapDiv.parentNode.insertBefore(outerContainer, mapDiv); 
+    mapDiv.parentNode.removeChild(mapDiv);
+    outerContainer.appendChild(mapDiv);
+    outerContainer.style.width = mapDiv.style.width;
+    outerContainer.style.height = mapDiv.style.height;
+    outerContainer.style.display = 'inline-block'
+    outerContainer.style.overflow = 'hidden';
+    return outerContainer;
+  },
+
+  _removeOuterContainer: function (mapDiv, outerContainer, blankDiv) {
+    if (outerContainer.parentNode) {
+      outerContainer.parentNode.insertBefore(mapDiv, outerContainer);
+      outerContainer.parentNode.removeChild(blankDiv);
+      outerContainer.parentNode.removeChild(outerContainer);      
+    }
+  },
+
+  _addCss: function () {
+    var css = document.createElement("style");
+    css.type = "text/css";
+    css.innerHTML = `.leaflet-control-easyPrint-button { 
+      background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTYuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjE2cHgiIGhlaWdodD0iMTZweCIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMiA1MTI7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4KPGc+Cgk8cGF0aCBkPSJNMTI4LDMyaDI1NnY2NEgxMjhWMzJ6IE00ODAsMTI4SDMyYy0xNy42LDAtMzIsMTQuNC0zMiwzMnYxNjBjMCwxNy42LDE0LjM5OCwzMiwzMiwzMmg5NnYxMjhoMjU2VjM1Mmg5NiAgIGMxNy42LDAsMzItMTQuNCwzMi0zMlYxNjBDNTEyLDE0Mi40LDQ5Ny42LDEyOCw0ODAsMTI4eiBNMzUyLDQ0OEgxNjBWMjg4aDE5MlY0NDh6IE00ODcuMTk5LDE3NmMwLDEyLjgxMy0xMC4zODcsMjMuMi0yMy4xOTcsMjMuMiAgIGMtMTIuODEyLDAtMjMuMjAxLTEwLjM4Ny0yMy4yMDEtMjMuMnMxMC4zODktMjMuMiwyMy4xOTktMjMuMkM0NzYuODE0LDE1Mi44LDQ4Ny4xOTksMTYzLjE4Nyw0ODcuMTk5LDE3NnoiIGZpbGw9IiMwMDAwMDAiLz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K);
+      background-size: 16px 16px; 
+      cursor: pointer; 
+    }
+    .leaflet-control-easyPrint-button-export { 
+      background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTYuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjE2cHgiIGhlaWdodD0iMTZweCIgdmlld0JveD0iMCAwIDQzMy41IDQzMy41IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA0MzMuNSA0MzMuNTsiIHhtbDpzcGFjZT0icHJlc2VydmUiPgo8Zz4KCTxnIGlkPSJmaWxlLWRvd25sb2FkIj4KCQk8cGF0aCBkPSJNMzk1LjI1LDE1M2gtMTAyVjBoLTE1M3YxNTNoLTEwMmwxNzguNSwxNzguNUwzOTUuMjUsMTUzeiBNMzguMjUsMzgyLjV2NTFoMzU3di01MUgzOC4yNXoiIGZpbGw9IiMwMDAwMDAiLz4KCTwvZz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K);
+      background-size: 16px 16px; 
+      cursor: pointer; 
+    }
+    .easyPrintHolder a {
+      background-size: 16px 16px;
+      cursor: pointer;
+    }
+    .easyPrintHolder .CurrentSize{
+      background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMTZweCIgdmVyc2lvbj0iMS4xIiBoZWlnaHQ9IjE2cHgiIHZpZXdCb3g9IjAgMCA2NCA2NCIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgNjQgNjQiPgogIDxnPgogICAgPGcgZmlsbD0iIzFEMUQxQiI+CiAgICAgIDxwYXRoIGQ9Ik0yNS4yNTUsMzUuOTA1TDQuMDE2LDU3LjE0NVY0Ni41OWMwLTEuMTA4LTAuODk3LTIuMDA4LTIuMDA4LTIuMDA4QzAuODk4LDQ0LjU4MiwwLDQ1LjQ4MSwwLDQ2LjU5djE1LjQwMiAgICBjMCwwLjI2MSwwLjA1MywwLjUyMSwwLjE1NSwwLjc2N2MwLjIwMywwLjQ5MiwwLjU5NCwwLjg4MiwxLjA4NiwxLjA4N0MxLjQ4Niw2My45NDcsMS43NDcsNjQsMi4wMDgsNjRoMTUuNDAzICAgIGMxLjEwOSwwLDIuMDA4LTAuODk4LDIuMDA4LTIuMDA4cy0wLjg5OC0yLjAwOC0yLjAwOC0yLjAwOEg2Ljg1NWwyMS4yMzgtMjEuMjRjMC43ODQtMC43ODQsMC43ODQtMi4wNTUsMC0yLjgzOSAgICBTMjYuMDM5LDM1LjEyMSwyNS4yNTUsMzUuOTA1eiIgZmlsbD0iIzAwMDAwMCIvPgogICAgICA8cGF0aCBkPSJtNjMuODQ1LDEuMjQxYy0wLjIwMy0wLjQ5MS0wLjU5NC0wLjg4Mi0xLjA4Ni0xLjA4Ny0wLjI0NS0wLjEwMS0wLjUwNi0wLjE1NC0wLjc2Ny0wLjE1NGgtMTUuNDAzYy0xLjEwOSwwLTIuMDA4LDAuODk4LTIuMDA4LDIuMDA4czAuODk4LDIuMDA4IDIuMDA4LDIuMDA4aDEwLjU1NmwtMjEuMjM4LDIxLjI0Yy0wLjc4NCwwLjc4NC0wLjc4NCwyLjA1NSAwLDIuODM5IDAuMzkyLDAuMzkyIDAuOTA2LDAuNTg5IDEuNDIsMC41ODlzMS4wMjctMC4xOTcgMS40MTktMC41ODlsMjEuMjM4LTIxLjI0djEwLjU1NWMwLDEuMTA4IDAuODk3LDIuMDA4IDIuMDA4LDIuMDA4IDEuMTA5LDAgMi4wMDgtMC44OTkgMi4wMDgtMi4wMDh2LTE1LjQwMmMwLTAuMjYxLTAuMDUzLTAuNTIyLTAuMTU1LTAuNzY3eiIgZmlsbD0iIzAwMDAwMCIvPgogICAgPC9nPgogIDwvZz4KPC9zdmc+Cg==)
+    }
+    .easyPrintHolder .page {
+      background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTguMS4xLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDQ0NC44MzMgNDQ0LjgzMyIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNDQ0LjgzMyA0NDQuODMzOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgd2lkdGg9IjUxMnB4IiBoZWlnaHQ9IjUxMnB4Ij4KPGc+Cgk8Zz4KCQk8cGF0aCBkPSJNNTUuMjUsNDQ0LjgzM2gzMzQuMzMzYzkuMzUsMCwxNy03LjY1LDE3LTE3VjEzOS4xMTdjMC00LjgxNy0xLjk4My05LjM1LTUuMzgzLTEyLjQ2N0wyNjkuNzMzLDQuNTMzICAgIEMyNjYuNjE3LDEuNywyNjIuMzY3LDAsMjU4LjExNywwSDU1LjI1Yy05LjM1LDAtMTcsNy42NS0xNywxN3Y0MTAuODMzQzM4LjI1LDQzNy4xODMsNDUuOSw0NDQuODMzLDU1LjI1LDQ0NC44MzN6ICAgICBNMzcyLjU4MywxNDYuNDgzdjAuODVIMjU2LjQxN3YtMTA4LjhMMzcyLjU4MywxNDYuNDgzeiBNNzIuMjUsMzRoMTUwLjE2N3YxMzAuMzMzYzAsOS4zNSw3LjY1LDE3LDE3LDE3aDEzMy4xNjd2MjI5LjVINzIuMjVWMzR6ICAgICIgZmlsbD0iIzAwMDAwMCIvPgoJPC9nPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+Cjwvc3ZnPgo=);
+    }
+    .easyPrintHolder .A4Landscape { 
+      transform: rotate(-90deg);
+    }
+
+    .leaflet-control-easyPrint-button{
+      display: inline-block;
+    }
+    .easyPrintHolder{
+      margin-top:-31px;
+      margin-bottom: -5px;
+      margin-left: 30px;
+      padding-left: 0px;
+      display: none;
+    }
+
+    .easyPrintSizeMode {
+      display: inline-block;
+    }
+    .easyPrintHolder .easyPrintSizeMode a {
+      border-radius: 0px;
+    }
+
+    .easyPrintHolder .easyPrintSizeMode:last-child a{
+      border-top-right-radius: 2px;
+      border-bottom-right-radius: 2px;
+      margin-left: -1px;
+    }
+
+    .easyPrintPortrait:hover, .easyPrintLandscape:hover{
+      background-color: #757570;
+      cursor: pointer;
+    }`;
+    document.body.appendChild(css);
+  },
+
+  _dataURItoBlob: function (dataURI) {
+    var byteString = atob(dataURI.split(',')[1]);
+    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+    var ab = new ArrayBuffer(byteString.length);
+    var dw = new DataView(ab);
+    for(var i = 0; i < byteString.length; i++) {
+        dw.setUint8(i, byteString.charCodeAt(i));
+    }
+    return new Blob([ab], {type: mimeString});
+  },
+
+  _togglePageSizeButtons: function (e) {
+    var holderStyle = this.holder.style
+    var linkStyle = this.link.style
+    if (e.type === 'mouseover') {
+      holderStyle.display = 'block';
+      linkStyle.borderTopRightRadius = '0'
+      linkStyle.borderBottomRightRadius = '0'
+    } else {
+      holderStyle.display = 'none';
+      linkStyle.borderTopRightRadius = '2px'
+      linkStyle.borderBottomRightRadius = '2px'      
+    }
+  },
+
+  _toggleControls: function (show) {
+    var controlContainer = document.getElementsByClassName("leaflet-control-container")[0];
+    if (show) return controlContainer.style.display = 'block';
+    controlContainer.style.display = 'none';
+  },
+  _toggleClasses: function (classes, show) {
+    classes.forEach(function (className) {
+      var div = document.getElementsByClassName(className)[0];
+      if (show) return div.style.display = 'block';
+      div.style.display = 'none';
+    });
+  },
+
+  _a4PageSize: {
+    height: 715,
+    width: 1045
+  }
+
+});
+
+L.easyPrint = function(options) {
+  return new L.Control.EasyPrint(options);
+};
+
+
+},{"dom-to-image-more":1,"file-saver":2}]},{},[3]);
